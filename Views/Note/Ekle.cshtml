@@ -1,0 +1,67 @@
+﻿@model NotDefteri.Models.Not
+
+@{
+    ViewData["Title"] = "Yeni Not";
+}
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow-lg p-4" style="width:600px; border-radius:20px;">
+
+        <h3 class="text-center mb-4">
+            <i class="fa fa-pen-to-square"></i> Yeni Not Oluştur
+        </h3>
+
+        <form asp-action="Ekle" method="post">
+
+            <!-- Başlık -->
+            <div class="mb-3">
+                <label class="form-label">Başlık</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa fa-heading"></i>
+                    </span>
+                    <input asp-for="Baslik" class="form-control"
+                           placeholder="Not başlığı giriniz..." required />
+                </div>
+            </div>
+
+            <!-- İçerik -->
+            <div class="mb-3">
+                <label class="form-label">İçerik</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa fa-align-left"></i>
+                    </span>
+                    <textarea asp-for="Icerik"
+                              class="form-control"
+                              rows="5"
+                              placeholder="Not içeriğini yazınız..."
+                              required></textarea>
+                </div>
+            </div>
+
+            
+
+            <!-- Tarih -->
+            <div class="mb-3">
+                <label class="form-label">Tarih</label>
+                <input asp-for="OlusturmaTarihi"
+                       type="datetime-local"
+                       class="form-control"
+                       value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+            </div>
+
+            <!-- Butonlar -->
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fa fa-arrow-left"></i> Geri
+                </a>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check"></i> Kaydet
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

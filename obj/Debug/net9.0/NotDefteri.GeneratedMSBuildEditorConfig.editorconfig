@@ -1,0 +1,61 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = NotDefteri
+build_property.RootNamespace = NotDefteri
+build_property.ProjectDir = /home/alp151/Masaüstü/MVC/NotDefteri/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/alp151/Masaüstü/MVC/NotDefteri
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Note/Ayarlar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZS9BeWFybGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Note/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZS9EdXplbmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Note/Ekle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZS9Fa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Note/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alp151/Masaüstü/MVC/NotDefteri/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-8rcbn0eqv6

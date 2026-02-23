@@ -1,0 +1,80 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Giriş Yap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            width: 380px;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .btn-login {
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .login-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h3 class="login-title">Not Defteri Giriş</h3>
+
+        @if (ViewBag.Hata != null)
+        {
+            <div class="alert alert-danger text-center">
+                @ViewBag.Hata
+            </div>
+        }
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Kullanıcı Adı</label>
+                <input type="text" name="kullanici" class="form-control" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Şifre</label>
+                <input type="password" name="sifre" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-light w-100 btn-login">
+                Giriş Yap
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

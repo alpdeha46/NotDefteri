@@ -1,0 +1,79 @@
+﻿
+
+<style>
+body { background:#111; color:white; font-family:Arial; }
+
+.card-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.card {
+    background:#ffffff;
+    width:250px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.5);
+}
+
+.btn-group {
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.icon-btn {
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.add-btn {
+    display:inline-block;
+    margin-bottom:20px;
+    background:#28a745;
+    padding:10px 15px;
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+}
+</style>
+
+@model List<NotDefteri.Models.Not>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+        @foreach (var not in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-lg border-0 rounded-4 p-3">
+
+                    <h4 class="fw-bold">@not.Baslik</h4>
+
+                    <p class="text-muted small">
+                        📅 @not.OlusturmaTarihi.ToString("dd.MM.yyyy HH:mm")
+                    </p>
+
+                    <p>@not.Icerik</p>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a asp-action="Duzenle" asp-route-id="@not.Id"
+                           class="btn btn-sm btn-primary">Düzenle</a>
+
+                        <a asp-action="Sil" asp-route-id="@not.Id"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Silmek istiyor musun?');">
+                            Sil
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+

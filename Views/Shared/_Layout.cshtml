@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NotDefteri</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/NotDefteri.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            transition: 0.3s;
+        }
+
+        .sidebar {
+            width: 230px;
+            min-height: 100vh;
+            background: #111;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .sidebar a:hover {
+            color: #0d6efd;
+        }
+
+        .content {
+            margin-left: 230px;
+            padding: 25px;
+        }
+
+        .dark-mode {
+            background: #111 !important;
+            color: white !important;
+        }
+
+        .light-mode {
+            background: #f8f9fa !important;
+            color: black !important;
+        }
+
+        .theme-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h4>📘 NotDefteri</h4>
+        <hr />
+
+        <a asp-controller="Note" asp-action="Index">
+            <i class="fa fa-book"></i> Notlar
+        </a>
+
+        <a asp-controller="Note" asp-action="Ekle">
+            <i class="fa fa-plus"></i> Yeni Not
+        </a>
+
+       
+        <a asp-controller="Note" asp-action="Ayarlar">
+            <i class="fa fa-gear"></i> Ayarlar
+        </a>
+
+        <a asp-controller="Home" asp-action="Index">
+            <i class="fa fa-right-from-bracket"></i> Çıkış
+        </a>
+
+        <button onclick="temaDegistir()" class="btn btn-outline-light btn-sm theme-btn">
+            🌙 Tema Değiştir
+        </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function temaDegistir() {
+            const body = document.getElementById("body");
+
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                body.classList.add("light-mode");
+            }
+            else {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+            }
+        }
+
+        // Default dark
+        document.getElementById("body").classList.add("dark-mode");
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
