@@ -160,7 +160,7 @@ CRUD işlemlerini, session yönetimini ve JSON tabanlı veri saklamayı uygulama
 # 👨‍💻 Geliştirici
 
 Alp Deha Suyadal
-Bilişim Teknolojileri Öğrencisi
+-Bilişim Teknolojileri Öğrencisi
 ---
 
 ⭐ Eğer projeyi beğendiysen yıldız bırakmayı unutma!
