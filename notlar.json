@@ -1,32 +1,32 @@
 [
   {
     "Id": 1,
-    "Baslik": "MVC",
-    "Icerik": "123",
+    "Baslik": "Örnek Not 4",
+    "Icerik": "Örnek Not ",
     "OlusturmaTarihi": "2026-02-26T04:50:54.2920419+03:00",
     "OnemliMi": false,
     "Kullanici": "admin"
   },
   {
     "Id": 2,
-    "Baslik": "sfaadf",
-    "Icerik": "1234",
+    "Baslik": "Örnek Not 3",
+    "Icerik": "Örnek Not ",
     "OlusturmaTarihi": "2026-02-26T04:50:58.5138772+03:00",
     "OnemliMi": false,
     "Kullanici": "admin"
   },
   {
     "Id": 3,
-    "Baslik": "MVC",
-    "Icerik": "12344",
+    "Baslik": "Örnek Not 2",
+    "Icerik": "Örnek Not ",
     "OlusturmaTarihi": "2026-02-26T04:51:01.2631748+03:00",
     "OnemliMi": false,
     "Kullanici": "admin"
   },
   {
     "Id": 4,
-    "Baslik": "MVC",
-    "Icerik": "1234",
+    "Baslik": "Örnek Not 1",
+    "Icerik": "Örnek Not",
     "OlusturmaTarihi": "2026-02-26T04:51:07.7684591+03:00",
     "OnemliMi": false,
     "Kullanici": "admin"
