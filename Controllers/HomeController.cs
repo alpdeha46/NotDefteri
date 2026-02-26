@@ -5,29 +5,27 @@ namespace NotDefteri.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(); 
         }
 
         [HttpPost]
         public IActionResult Index(string kullanici, string sifre)
         {
+            
             if (kullanici == "admin" && sifre == "1234")
             {
+            
                 HttpContext.Session.SetString("kullanici", kullanici);
 
-                return RedirectToAction("Ekle", "Note");
+                
+                return RedirectToAction("Index", "Anasayfa");
             }
 
             ViewBag.Hata = "Kullanıcı adı veya şifre yanlış!";
             return View();
-        }
-
-        public IActionResult Cikis()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
         }
     }
 }

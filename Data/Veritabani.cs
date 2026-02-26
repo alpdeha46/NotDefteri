@@ -1,14 +1,56 @@
 using NotDefteri.Models;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace NotDefteri.Data
 {
     public static class Veritabani
     {
-        public static List<Not> Notlar = new List<Not>()
+        
+        private static readonly string NotlarDosya = "notlar.json";
+        private static readonly string KullanicilarDosya = "kullanicilar.json";
+
+        public static List<Not> Notlar { get; set; } = new List<Not>();
+        public static List<Kullanici> Kullanicilar { get; set; } = new List<Kullanici>();
+
+        static Veritabani()
         {
-            new Not { Id = 1, Baslik = "İlk Not", Icerik = "Bu bir örnek nottur." },
-            new Not { Id = 2, Baslik = "MVC", Icerik = "MVC öğreniyorum." }
-        };
+            Yükle();
+        }
+
+        public static void Yükle()
+        {
+            if (File.Exists(NotlarDosya))
+            {
+                Notlar = JsonConvert.DeserializeObject<List<Not>>(File.ReadAllText(NotlarDosya)) ?? new List<Not>();
+            }
+
+            if (File.Exists(KullanicilarDosya))
+            {
+                Kullanicilar = JsonConvert.DeserializeObject<List<Kullanici>>(File.ReadAllText(KullanicilarDosya)) ?? new List<Kullanici>();
+            }
+            else
+            {
+                
+                Kullanicilar.Add(new Kullanici
+                {
+                    KullaniciAdi = "admin",
+                    Sifre = "1234",
+                    Ayarlar = new Ayarlar() { DarkMode = true, NotlariTersSirala = false, NotTarihiGoster = true }
+                });
+                KaydetKullanicilar();
+            }
+        }
+
+        public static void KaydetNotlar()
+        {
+            File.WriteAllText(NotlarDosya, JsonConvert.SerializeObject(Notlar, Formatting.Indented));
+        }
+
+        public static void KaydetKullanicilar()
+        {
+            File.WriteAllText(KullanicilarDosya, JsonConvert.SerializeObject(Kullanicilar, Formatting.Indented));
+        }
     }
 }

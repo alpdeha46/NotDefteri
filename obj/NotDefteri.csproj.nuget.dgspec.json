@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/alp151/Masaüstü/MVC/NotDefteri/NotDefteri.csproj": {}
+    "C:\\Users\\suyad\\Desktop\\Ders\\MVC\\NotDefteri\\NotDefteri\\NotDefteri.csproj": {}
   },
   "projects": {
-    "/home/alp151/Masaüstü/MVC/NotDefteri/NotDefteri.csproj": {
+    "C:\\Users\\suyad\\Desktop\\Ders\\MVC\\NotDefteri\\NotDefteri\\NotDefteri.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/alp151/Masaüstü/MVC/NotDefteri/NotDefteri.csproj",
+        "projectUniqueName": "C:\\Users\\suyad\\Desktop\\Ders\\MVC\\NotDefteri\\NotDefteri\\NotDefteri.csproj",
         "projectName": "NotDefteri",
-        "projectPath": "/home/alp151/Masaüstü/MVC/NotDefteri/NotDefteri.csproj",
-        "packagesPath": "/home/alp151/.nuget/packages/",
-        "outputPath": "/home/alp151/Masaüstü/MVC/NotDefteri/obj/",
+        "projectPath": "C:\\Users\\suyad\\Desktop\\Ders\\MVC\\NotDefteri\\NotDefteri\\NotDefteri.csproj",
+        "packagesPath": "C:\\Users\\suyad\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\suyad\\Desktop\\Ders\\MVC\\NotDefteri\\NotDefteri\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/alp151/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\suyad\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -43,6 +43,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

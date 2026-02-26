@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    color: #000;
+    padding-top: 50px;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card i {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+
+<div class="container">
+    <h2 class="mb-5 text-center">Anasayfa</h2>
+
+    <div class="row g-4 justify-content-center">
+       
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card p-4 text-center" onclick="location.href='@Url.Action("Index","Note")'">
+                <i class="fa fa-book fa-2x"></i>
+                <p class="card-title mt-2">Notlar</p>
+            </div>
+        </div>
+
+      
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card p-4 text-center" onclick="location.href='@Url.Action("Index","Galeri")'">
+                <i class="fa fa-image fa-2x"></i>
+                <p class="card-title mt-2">Galeri</p>
+            </div>
+        </div>
+
+       
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card p-4 text-center" onclick="location.href='@Url.Action("Index","Dashboard")'">
+                <i class="fa fa-bar-chart fa-2x"></i>
+                <p class="card-title mt-2">Dashboard</p>
+            </div>
+        </div>
+
+       
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card p-4 text-center" onclick="location.href='@Url.Action("Ayarlar","Note")'">
+                <i class="fa fa-gear fa-2x"></i>
+                <p class="card-title mt-2">Ayarlar</p>
+            </div>
+        </div>
+    </div>
+</div>  

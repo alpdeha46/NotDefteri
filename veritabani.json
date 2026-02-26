@@ -1,0 +1,14 @@
+{
+  "Notlar": [],
+  "Kullanicilar": [
+    {
+      "KullaniciAdi": "admin",
+      "Sifre": "1234",
+      "Ayarlar": {
+        "NotTarihiGoster": true,
+        "NotlariTersSirala": false,
+        "DarkMode": false
+      }
+    }
+  ]
+}

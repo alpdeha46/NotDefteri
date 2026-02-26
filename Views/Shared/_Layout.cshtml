@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NotDefteri.styles.css" asp-append-version="true" />
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -56,16 +56,39 @@
         .theme-btn {
             margin-top: 20px;
         }
+       
+body.dark-mode .sidebar,
+body.dark-mode .content {
+    background: #111;
+    color: white;
+}
+
+body.light-mode .sidebar,
+body.light-mode .content {
+    background: #f8f9fa;
+    color: black;
+}
+
+body.dark-mode .sidebar a { color: white; }
+body.dark-mode .sidebar a:hover { color: #0d6efd; }
+
+body.light-mode .sidebar a { color: black; }
+body.light-mode .sidebar a:hover { color: #0d6efd; }
     </style>
 </head>
 
 <body id="body">
 
-    <!-- SIDEBAR -->
+    
     <div class="sidebar">
-        <h4>📘 NotDefteri</h4>
+        <h4>📘📷 Kisisel Yonetim Sistemi</h4>
         <hr />
-
+        <a asp-controller="Anasayfa" asp-action="Index">
+        <i class="fa fa-house"></i> Anasayfa
+        </a>
+        <a asp-controller="Dashboard" asp-action="Index">
+            <i class="bi bi-bar-chart"></i> Dashboard
+        </a>
         <a asp-controller="Note" asp-action="Index">
             <i class="fa fa-book"></i> Notlar
         </a>
@@ -73,12 +96,15 @@
         <a asp-controller="Note" asp-action="Ekle">
             <i class="fa fa-plus"></i> Yeni Not
         </a>
-
-       
+        <a asp-controller="Galeri" asp-action="Index">
+            <i class="fa fa-image"></i> Galeri
+        </a>
+        <a asp-controller="Galeri" asp-action="Ekle">
+            <i class="fa fa-plus"></i> Yeni Görsel
+        </a>
         <a asp-controller="Note" asp-action="Ayarlar">
             <i class="fa fa-gear"></i> Ayarlar
         </a>
-
         <a asp-controller="Home" asp-action="Index">
             <i class="fa fa-right-from-bracket"></i> Çıkış
         </a>
@@ -88,7 +114,7 @@
         </button>
     </div>
 
-    <!-- CONTENT -->
+   
     <div class="content">
         @RenderBody()
     </div>
@@ -96,25 +122,54 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        function temaDegistir() {
-            const body = document.getElementById("body");
 
-            if (body.classList.contains("dark-mode")) {
-                body.classList.remove("dark-mode");
-                body.classList.add("light-mode");
-            }
-            else {
-                body.classList.remove("light-mode");
-                body.classList.add("dark-mode");
-            }
-        }
+     
+   <script>
+function temaDegistir() {
+    const body = document.getElementById("body");
+    const temaBtn = document.querySelector(".theme-btn");
 
-        // Default dark
-        document.getElementById("body").classList.add("dark-mode");
-    </script>
+    if (body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        localStorage.setItem("tema", "light");
+
+        // Buton rengi light modda koyu yap
+        temaBtn.classList.remove("btn-outline-light");
+        temaBtn.classList.add("btn-outline-dark");
+    } else {
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        localStorage.setItem("tema", "dark");
+
+        // Buton rengi dark modda açık yap
+        temaBtn.classList.remove("btn-outline-dark");
+        temaBtn.classList.add("btn-outline-light");
+    }
+}
+
+// Sayfa yüklenince kayıtlı temayı uygula
+window.onload = function () {
+    const kayitliTema = localStorage.getItem("tema");
+    const body = document.getElementById("body");
+    const temaBtn = document.querySelector(".theme-btn");
+
+    if (kayitliTema === "light") {
+        body.classList.add("light-mode");
+        temaBtn.classList.remove("btn-outline-light");
+        temaBtn.classList.add("btn-outline-dark");
+    } else {
+        body.classList.add("dark-mode");
+        temaBtn.classList.remove("btn-outline-dark");
+        temaBtn.classList.add("btn-outline-light");
+    }
+};
+</script>
+
+    
 
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>
+
 </html>

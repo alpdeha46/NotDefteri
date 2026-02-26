@@ -1,5 +1,9 @@
+@using NotDefteri.Data
+@using NotDefteri.Models
 @{
-    var kullanici = Context.Session.GetString("kullanici");
+    var kullaniciAdi = Context.Session.GetString("kullanici");
+    var kullanici = Veritabani.Kullanicilar.FirstOrDefault(u => u.KullaniciAdi == kullaniciAdi);
+    var ayar = kullanici?.Ayarlar ?? new Ayarlar();
 }
 
 <div class="container mt-5">
@@ -10,7 +14,7 @@
         <!-- Kullanıcı Bilgisi -->
         <div class="mb-4">
             <h5>👤 Kullanıcı Bilgisi</h5>
-            <p><strong>Kullanıcı Adı:</strong> @kullanici</p>
+            <p><strong>Kullanıcı Adı:</strong> @kullaniciAdi</p>
         </div>
 
         <hr />
@@ -18,6 +22,14 @@
         <!-- Şifre Değiştir -->
         <div class="mb-4">
             <h5>🔒 Şifre Değiştir</h5>
+            @if (TempData["Mesaj"] != null)
+            {
+                <div class="alert alert-success">@TempData["Mesaj"]</div>
+            }
+            @if (TempData["Hata"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Hata"]</div>
+            }
 
             <form asp-action="SifreDegistir" method="post">
                 <div class="mb-2">
@@ -38,42 +50,63 @@
 
         <hr />
 
-        <!-- Not Ayarları -->
+        
         <div class="mb-4">
             <h5>📝 Not Ayarları</h5>
 
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" />
-                <label class="form-check-label">
-                    Not oluştururken tarihi göster
-                </label>
-            </div>
+            <form asp-action="AyarGuncelle" method="post">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="NotTarihiGoster"
+                           value="true" @(ayar.NotTarihiGoster ? "checked" : "") />
+                    <label class="form-check-label">
+                        Not oluştururken tarihi göster
+                    </label>
+                </div>
 
-            <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" />
-                <label class="form-check-label">
-                    Notları en yeniden eskiye sırala
-                </label>
-            </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="NotlariTersSirala"
+                           value="true" @(ayar.NotlariTersSirala ? "checked" : "") />
+                    <label class="form-check-label">
+                        Notları en yeniden eskiye sırala
+                    </label>
+                </div>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="DarkMode"
+                           value="true" @(ayar.DarkMode ? "checked" : "") />
+                    <label class="form-check-label">
+                        Dark Mode
+                    </label>
+                </div>
+
+                <button class="btn btn-success mt-3">Ayarları Kaydet</button>
+            </form>
         </div>
 
         <hr />
 
-        <!-- Tehlikeli Alan -->
+       
         <div class="mb-4">
             <h5 class="text-danger">🗑 Tehlikeli İşlemler</h5>
 
             <form asp-action="TumNotlariSil" method="post"
                   onsubmit="return confirm('Tüm notlar silinsin mi?');">
-                <button class="btn btn-danger">
+                <button class="btn btn-danger w-100">
                     Tüm Notları Sil
+                </button>
+            </form>
+            <br>
+            <form asp-action="TumGorselleriSil" method="post"
+                  onsubmit="return confirm('Tüm görseller silinsin mi?');">
+                <button class="btn btn-danger w-100">
+                    Tüm görselleri Sil
                 </button>
             </form>
         </div>
 
         <hr />
 
-        <a asp-controller="Home" asp-action="Cikis"
+        <a asp-controller="Account" asp-action="Logout"
            class="btn btn-dark w-100">
             Çıkış Yap
         </a>

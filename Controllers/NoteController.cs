@@ -7,50 +7,110 @@ namespace NotDefteri.Controllers
 {
     public class NoteController : Controller
     {
-        private bool LoginKontrol()
+        private string? KullaniciAdi => HttpContext.Session.GetString("kullanici");
+
+        private IActionResult LoginKontrol()
         {
-            return HttpContext.Session.GetString("kullanici") != null;
+            if (string.IsNullOrEmpty(KullaniciAdi))
+                return RedirectToAction("Index", "Home");
+            return null;
         }
 
-        public IActionResult Index(string ara, bool? onemli)
+        public IActionResult Index()
         {
-            if (!LoginKontrol())
-                return RedirectToAction("Index", "Home");
-
-            var kullanici = HttpContext.Session.GetString("kullanici");
+            var redirect = LoginKontrol();
+            if (redirect != null) return redirect;
 
             var notlar = Veritabani.Notlar
-                .Where(x => x.Kullanici == kullanici);
+                .Where(n => n.Kullanici == KullaniciAdi);
 
-            if (!string.IsNullOrEmpty(ara))
-                notlar = notlar.Where(x => x.Baslik.Contains(ara));
+            var ayar = Veritabani.Kullanicilar.First(u => u.KullaniciAdi == KullaniciAdi).Ayarlar;
 
-            if (onemli == true)
-                notlar = notlar.Where(x => x.OnemliMi);
+            if (ayar.NotlariTersSirala)
+                notlar = notlar.OrderByDescending(n => n.OlusturmaTarihi);
 
             return View(notlar.ToList());
         }
 
-        public IActionResult Ayarlar()
+        public IActionResult Ekle()
         {
-            if (!LoginKontrol())
-                return RedirectToAction("Index", "Home");
-
+            if (LoginKontrol() != null) return LoginKontrol();
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Ekle(Not not)
+        {
+            if (LoginKontrol() != null) return LoginKontrol();
+
+            not.Id = Veritabani.Notlar.Count > 0 ? Veritabani.Notlar.Max(n => n.Id) + 1 : 1;
+            not.Kullanici = KullaniciAdi;
+            not.OlusturmaTarihi = DateTime.Now;
+
+            Veritabani.Notlar.Add(not);
+            Veritabani.KaydetNotlar(); 
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Duzenle(int id)
+        {
+            if (LoginKontrol() != null) return LoginKontrol();
+
+            var not = Veritabani.Notlar.FirstOrDefault(n => n.Id == id);
+            return View(not);
+        }
+
+        [HttpPost]
+        public IActionResult Duzenle(Not gelenNot)
+        {
+            if (LoginKontrol() != null) return LoginKontrol();
+
+            var not = Veritabani.Notlar.FirstOrDefault(n => n.Id == gelenNot.Id);
+            if (not != null)
+            {
+                not.Baslik = gelenNot.Baslik;
+                not.Icerik = gelenNot.Icerik;
+                not.OnemliMi = gelenNot.OnemliMi;
+
+                Veritabani.KaydetNotlar(); 
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Sil(int id)
+        {
+            if (LoginKontrol() != null) return LoginKontrol();
+
+            var not = Veritabani.Notlar.FirstOrDefault(n => n.Id == id);
+            if (not != null)
+            {
+                Veritabani.Notlar.Remove(not);
+                Veritabani.KaydetNotlar();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Ayarlar()
+        {
+            if (LoginKontrol() != null) return LoginKontrol();
+            return View();
+        }
 
         [HttpPost]
         public IActionResult SifreDegistir(string eskiSifre, string yeniSifre)
         {
-            if (!LoginKontrol())
-                return RedirectToAction("Index", "Home");
+            if (LoginKontrol() != null) return LoginKontrol();
 
-            // Şimdilik sabit şifre sistemi
-            if (eskiSifre == "1234")
+            var kullanici = Veritabani.Kullanicilar.FirstOrDefault(u => u.KullaniciAdi == KullaniciAdi);
+
+            if (kullanici != null && kullanici.Sifre == eskiSifre)
             {
-                // Normalde burada veritabanında güncellenir
-                TempData["Mesaj"] = "Şifre başarıyla değiştirildi (demo).";
+                kullanici.Sifre = yeniSifre;
+                Veritabani.KaydetKullanicilar(); // Kalıcı
+                TempData["Mesaj"] = "Şifre başarıyla değiştirildi!";
             }
             else
             {
@@ -63,66 +123,46 @@ namespace NotDefteri.Controllers
         [HttpPost]
         public IActionResult TumNotlariSil()
         {
-            if (!LoginKontrol())
-                return RedirectToAction("Index", "Home");
+            if (LoginKontrol() != null) return LoginKontrol();
 
-            var kullanici = HttpContext.Session.GetString("kullanici");
-
-            Veritabani.Notlar.RemoveAll(x => x.Kullanici == kullanici);
-
+            Veritabani.Notlar.RemoveAll(n => n.Kullanici == KullaniciAdi);
+            Veritabani.KaydetNotlar();
             TempData["Mesaj"] = "Tüm notlar silindi!";
             return RedirectToAction("Ayarlar");
         }
-        public IActionResult Ekle()
-        {
-            if (!LoginKontrol())
-                return RedirectToAction("Index", "Home");
-
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Ekle(Not not)
+        public IActionResult TumGorselleriSil()
         {
-            not.Id = Veritabani.Notlar.Count + 1;
-            not.Kullanici = HttpContext.Session.GetString("kullanici");
-            not.OlusturmaTarihi = DateTime.Now;
+        var gorselKlasoru = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
 
-            Veritabani.Notlar.Add(not);
-
-            return RedirectToAction("Index");
-        }   
-
-        public IActionResult Duzenle(int id)
+        if (Directory.Exists(gorselKlasoru))
         {
-            var not = Veritabani.Notlar.FirstOrDefault(x => x.Id == id);
-            return View(not);
+            Directory.Delete(gorselKlasoru, true);
+            Directory.CreateDirectory(gorselKlasoru);
         }
 
+   
+        var tumResimler = ResimVeritabani.ResimleriGetir();
+        tumResimler.RemoveRange(0, tumResimler.Count);
+        ResimVeritabani.Kaydet(tumResimler);
+
+        TempData["Mesaj"] = "Tüm görseller silindi.";
+        return RedirectToAction("Index"); 
+    }
+       
         [HttpPost]
-        public IActionResult Duzenle(Not gelenNot)
+        public IActionResult AyarGuncelle(bool NotTarihiGoster, bool NotlariTersSirala, bool DarkMode)
         {
-            var not = Veritabani.Notlar.FirstOrDefault(x => x.Id == gelenNot.Id);
+            if (LoginKontrol() != null) return LoginKontrol();
 
-            if (not != null)
-            {
-                not.Baslik = gelenNot.Baslik;
-                not.Icerik = gelenNot.Icerik;
-                not.OnemliMi = gelenNot.OnemliMi;
-            }
+            var kullanici = Veritabani.Kullanicilar.First(u => u.KullaniciAdi == KullaniciAdi);
+            kullanici.Ayarlar.NotTarihiGoster = NotTarihiGoster;
+            kullanici.Ayarlar.NotlariTersSirala = NotlariTersSirala;
+            kullanici.Ayarlar.DarkMode = DarkMode;
+            Veritabani.KaydetKullanicilar();
 
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Sil(int id)
-        {
-            var not = Veritabani.Notlar.FirstOrDefault(x => x.Id == id);
-            if (not != null)
-                Veritabani.Notlar.Remove(not);
-
-            return RedirectToAction("Index");
+            TempData["Mesaj"] = "Ayarlar kaydedildi!";
+            return RedirectToAction("Ayarlar");
         }
     }
-
 }
-

@@ -1,4 +1,5 @@
 namespace NotDefteri.Models
+
 {
     public class Not
     {

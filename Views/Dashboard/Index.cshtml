@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2><i class="bi bi-bar-chart"></i> Dashboard</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
+
+    <div style="background:#4e73df; color:white; padding:20px; border-radius:10px; width:250px;">
+        <h4>📝 Toplam Bulunan Notlar</h4>
+        <h2>@ViewBag.ToplamNot</h2>
+        <div style="margin-top:30px;">
+        <a href="/Note" style="margin-left:10px; border: 1px solid black;" class="btn btn-primary">📝 Notlara Git</a> </div>
+        </div>
+    
+
+    <div style="background:#1cc88a; color:white; padding:20px; border-radius:10px; width:250px;">
+        <h4>🖼️Toplam Bulunan Resimler</h4>
+        <h2>@ViewBag.ToplamResim</h2>
+          <div style="margin-top:30px;">
+        <a href="/Galeri" style="margin-left:10px; border: 1px solid black;" class="btn btn-success">🖼️ Galeriye Git</a> </div>
+
+    </div>
+
+</div>
+
+
+<hr />
+
