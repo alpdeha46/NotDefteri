@@ -3,6 +3,12 @@
     "Id": 1,
     "Ad": "MVC",
     "Aciklama": "A\u00E7\u0131klama",
-    "ResimUrl": "/images/a6f3c86d-166f-4709-839b-5cd3e8fd747a.png"
+    "ResimUrl": "/images/f246f569-0699-4e99-96b9-51cf3bf18525.png"
+  },
+  {
+    "Id": 2,
+    "Ad": "MVC2",
+    "Aciklama": "Mvc tablo",
+    "ResimUrl": "/images/39d72373-44d8-43f0-a154-447036d56292.png"
   }
 ]

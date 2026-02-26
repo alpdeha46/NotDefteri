@@ -60,36 +60,47 @@ namespace NotDefteri.Controllers
         }
 
         [HttpPost]
-        public IActionResult Duzenle(Resim gelenResim, IFormFile file)
+public IActionResult Duzenle(Resim gelenResim, IFormFile file)
+{
+    var resimler = ResimVeritabani.ResimleriGetir();
+    var resim = resimler.FirstOrDefault(x => x.Id == gelenResim.Id);
+
+    if (resim == null)
+        return NotFound();
+
+    resim.Ad = gelenResim.Ad;
+    resim.Aciklama = gelenResim.Aciklama;
+
+    if (file != null && file.Length > 0)
+    {
+        var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+        // Eski dosyayı sil
+        if (!string.IsNullOrEmpty(resim.ResimUrl))
         {
-            var resimler = ResimVeritabani.ResimleriGetir();
-            var resim = resimler.FirstOrDefault(x => x.Id == gelenResim.Id);
-
-            if (resim == null)
-                return NotFound();
-
-            resim.Ad = gelenResim.Ad;
-            resim.Aciklama = gelenResim.Aciklama;
-
-            if (file != null && file.Length > 0)
+            var eskiDosya = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", resim.ResimUrl.TrimStart('/'));
+            if (System.IO.File.Exists(eskiDosya))
             {
-                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                var filePath = Path.Combine(uploads, fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                resim.ResimUrl = "/images/" + fileName;
+                System.IO.File.Delete(eskiDosya);
             }
-
-            ResimVeritabani.Kaydet(resimler);
-
-            return RedirectToAction("Index");
         }
+
+        // Yeni dosyayı kaydet
+        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+        var filePath = Path.Combine(uploads, fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            file.CopyTo(stream);
+        }
+
+        resim.ResimUrl = "/images/" + fileName;
+    }
+
+    ResimVeritabani.Kaydet(resimler);
+
+    return RedirectToAction("Index");
+}
 
         public IActionResult Sil(int id)
         {
