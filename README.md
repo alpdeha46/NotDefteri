@@ -1,4 +1,4 @@
-# 📘 KisiselYonetimSistemi
+# 📘 Kisisel Yonetim Sistemi
 
 ASP.NET Core MVC kullanılarak geliştirilmiş, kullanıcı bazlı çalışan bir kişisel yönetim uygulamasıdır.
 Not yönetimi, galeri sistemi ve dashboard istatistik paneli içerir.
